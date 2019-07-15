@@ -9,7 +9,7 @@ import com.rabbitmq.client.ConnectionFactory;
  **/
 public class EmitLog {
     private static final String EXCHANGE_NAME = "logs";
-    private final static String HOST = "10.1.133.139";
+    private final static String HOST = "localhost";
     private static final String QUEUE_NAME = "message";
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();

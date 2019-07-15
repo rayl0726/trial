@@ -7,7 +7,7 @@ import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
  * @author : liulei
  **/
 public class RabbitPoolInit {
-    private final static String HOST = "10.1.133.139";
+    private final static String HOST = "localhost";
     private final static int PORT = 5672;
     private final static String USERNAME = "tom";
     private final static String PASSWORD = "123456";

@@ -10,7 +10,7 @@ import com.rabbitmq.client.MessageProperties;
  **/
 public class NewTask {
     private static final String TASK_QUEUE_NAME = "task_queue";
-    private final static String HOST = "10.1.133.139";
+    private final static String HOST = "localhost";
 
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();

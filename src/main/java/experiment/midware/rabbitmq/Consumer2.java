@@ -8,7 +8,7 @@ import com.rabbitmq.client.DeliverCallback;
 /**
  * @author : liulei
  **/
-public class Consumer {
+public class Consumer2 {
     private final static String QUEUE_NAME = "Hello10";
 
     public static void main(String[] argv) throws Exception {

@@ -16,7 +16,7 @@ public class BatchOperation {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 //            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/craft_carrier?useSSL=true", "root", "123456");
-            conn = DriverManager.getConnection("jdbc:mysql://10.1.139.149:3306/test?useSSL=true&rewriteBatchedStatements=true", "root", "123456");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSL=true&rewriteBatchedStatements=true", "root", "123456");
 
             String sql = "insert into app_instance (app_key, ip, port, env, version, status, creator) values(?,?,?,?,?,?,?)";
 

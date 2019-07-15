@@ -10,7 +10,7 @@ import com.rabbitmq.client.ConnectionFactory;
  **/
 public class EmitLogDirect {
     private static final String EXCHANGE_NAME = "direct_logs";
-    private final static String HOST = "10.1.133.139";
+    private final static String HOST = "localhost";
 
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();

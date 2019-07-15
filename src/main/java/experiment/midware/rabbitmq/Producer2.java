@@ -7,17 +7,16 @@ import com.rabbitmq.client.ConnectionFactory;
 /**
  * @author : liulei
  **/
-public class Producer {
-    private final static String QUEUE_NAME = "Hello10";
+public class Producer2 {
+    private final static String QUEUE_NAME = "Hello";
 
     public static void main(String[] argv) throws Exception {
 
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
-//        factory.setHost("172.16.179.242");
         factory.setUsername("tom");
         factory.setPassword("123456");
-        factory.setPort(5672);
+        factory.setPort(5673);
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
