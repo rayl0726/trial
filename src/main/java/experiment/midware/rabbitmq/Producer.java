@@ -20,10 +20,13 @@ public class Producer {
         factory.setPort(5672);
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
-            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-            String message = "DoSomething World!";
-            channel.basicPublish("", QUEUE_NAME, null, message.getBytes("UTF-8"));
-            System.out.println(" [x] Sent '" + message + "'");
+            while(true) {
+                channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+                String message = "DoSomething World!";
+                channel.basicPublish("", QUEUE_NAME, null, message.getBytes("UTF-8"));
+                System.out.println(" [x] Sent '" + message + "'");
+                Thread.sleep(100);
+            }
         }
 
 

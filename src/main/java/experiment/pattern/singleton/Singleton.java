@@ -1,10 +1,12 @@
 package experiment.pattern.singleton;
 
+import java.util.Queue;
+
 /**
  * @author : liulei
  **/
 public class Singleton {
-    //线程安全，当两个线程同时getInstance 时 可能都为空，会创建两个实例
+    //线程不安全，当两个线程同时getInstance 时 可能都为空，会创建两个实例
 //    private static Singleton instance = null;
 //    private Singleton() {
 //    }
@@ -22,13 +24,25 @@ public class Singleton {
 //    }
 //
 //    public static Singleton getInstance() {
-//        synchronized (instance) {
+//        synchronized (Singleton.class) {
 //            if (instance == null) {
 //                instance = new Singleton();
 //            }
 //            return instance;
 //        }
 //    }
+
+    //线程安全，锁整个方法
+    private static volatile Singleton instance = null;
+    private Singleton() {
+    }
+
+    public synchronized static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
 
     // volatile 可以保证可见性，同时还有防止指令重排序的功能（jdk1.5以后）
     //多一个判断用来防止每次getInstance都阻塞
@@ -55,12 +69,16 @@ public class Singleton {
 //    }
 
     //静态类调用的时候才加载，比上面的节省了资源
-    private static class InstanceHolder {
-        private static Singleton instance = new Singleton();
+//    private static class InstanceHolder {
+//        private static Singleton instance = new Singleton();
+//
+//    }
+//    public static Singleton getInstance() {
+//        return InstanceHolder.instance;
+//    }
 
-    }
-    public static Singleton getInstance() {
-        return InstanceHolder.instance;
-    }
 
+    public static void main(String[] args) {
+        Singleton instance = Singleton.getInstance();
+    }
 }

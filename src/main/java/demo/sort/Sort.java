@@ -34,7 +34,7 @@ public class Sort {
 
     //选择排序
     //先在一次循环中默认当前的元素是最小，在剩下的元素中一个一个和第一个比较，出现较小的交换下标，剩余元素遍历结束后，当最小元素下标不同时，交换元素
-    public static int[] selection(int[] array) {
+    public static void selection(int[] array) {
         int length = array.length;
         for (int i = 0; i < length; i++) {
             int min = i;
@@ -47,12 +47,12 @@ public class Sort {
                 exchange(min, i, array);
             }
         }
-        return array;
+
     }
 
     //插入排序
     //将数组中的所有元素依次跟前面已经排好的元素相比较，如果选择的元素比已排序的元素小，则交换，直到全部元素都比较过为止
-    public static int[] insert(int[] array) {
+    public static void insert(int[] array) {
         int length = array.length;
         for (int i = 1; i < length; i++) {
             int temp = array[i];
@@ -66,12 +66,37 @@ public class Sort {
                 }
             }
         }
-        return array;
     }
 
     //希尔排序，带步长的插入排序，突破O（n2）
-    public static int[] shell(int[] array) {
-        return array;
+    public static void shell(int[] array) {
+        int length = array.length;
+        for (int gap = length/2; gap > 1; gap /= 2) {
+            for (int i = gap + 1; i  < length; i++) {
+                for (int j = i - gap; j > 0 && array[j] < array[j+gap] ; j = j-gap) {
+                    exchange(j, j+gap, array);
+                }
+            }
+        }
+    }
+
+    public  static void shell2(int[] array) {
+        int number = array.length / 2;
+        int i;
+        int j;
+        int temp;
+        while (number >= 1) {
+            for (i = number; i < array.length; i++) {
+                temp = array[i];
+                j = i - number;
+                while (j >= 0 && array[j] > temp) { //需要注意的是，这里array[j] > temp将会使数组从小到到排序。
+                    array[j + number] = array[j];
+                    j = j - number;
+                }
+                array[j + number] = temp;
+            }
+            number = number / 2;
+        }
     }
 
     //快速排序
@@ -98,13 +123,12 @@ public class Sort {
     }
 
     public static void main(String[] args) {
-        int[] list = {4,3,23,1234,324,435,567,567,4567,1,123,54,235};
-//        int[] bubble = bubble(list);
-//        int[] selection = selection(list);
-//        int[] insert = insert(list);
-
+        int[] list = {4,3,23,1234,324,435,567,567,4567,5};
+//        bubble(list);
+//        selection(list);
+//        insert(list);
+//        shell2(list);
         quick(list, 0, list.length-1);
-//        quickSort(list, 0, list.length-1);
         print(list);
     }
 }

@@ -1,5 +1,12 @@
 package experiment.concurrent.deadLock;
 
+import EDU.oswego.cs.dl.util.concurrent.Barrier;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
+import java.util.concurrent.locks.LockSupport;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -108,7 +115,41 @@ public class DeadLock {
         }
     }
     public static void main(String[] args) {
-
+//        DeadLockBySync();
         DeadLockByLcok();
     }
+
+//    public static void main(String[] args) {
+//        Object a = new Object(), b = new Object();
+//
+//        //Thread1 :
+//        synchronized (a) {
+//            //XXX
+//        }
+//        //Thread2 :
+//        synchronized (a) {
+//            //blocking
+//        }
+//
+//
+//        ReentrantLock lock = new ReentrantLock();
+//        //Thread1
+//        lock.lock();
+//        //xxx
+//        lock.unlock();
+//
+//        //Htread2
+//        lock.lock();
+//        //blocking
+//
+//
+//        //ReentrantLock, Semaphore, Barrier, CountDownLatch, BlockingQueue; => AbstractQueuedSynchronizer => LockSupport;
+//        //LockSupport.park();
+//        //synchronized ,LockSupport
+//
+//
+//        //synchronized ();LockSupport.park();new Object().wait();
+//
+//
+//    }
 }
