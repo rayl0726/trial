@@ -127,8 +127,8 @@ public class Sort {
 //        bubble(list);
 //        selection(list);
 //        insert(list);
-//        shell2(list);
-        quick(list, 0, list.length-1);
+        shell2(list);
+//        quick(list, 0, list.length-1);
         print(list);
     }
 }

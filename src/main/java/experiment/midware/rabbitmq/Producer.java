@@ -1,8 +1,7 @@
 package experiment.midware.rabbitmq;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.*;
+import com.rabbitmq.client.impl.AMQBasicProperties;
 
 /**
  * @author : liulei
@@ -18,15 +17,20 @@ public class Producer {
         factory.setUsername("tom");
         factory.setPassword("123456");
         factory.setPort(5672);
-        try (Connection connection = factory.newConnection();
-             Channel channel = connection.createChannel()) {
+
+        try {
+            Connection connection = factory.newConnection();
+            Channel channel = connection.createChannel();
+            channel.exchangeDeclare("fanoutTest", BuiltinExchangeType.FANOUT);
+//            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             while(true) {
-                channel.queueDeclare(QUEUE_NAME, false, false, false, null);
                 String message = "DoSomething World!";
-                channel.basicPublish("", QUEUE_NAME, null, message.getBytes("UTF-8"));
+                channel.basicPublish("fanoutTest", "command", MessageProperties.BASIC.builder().messageId(String.valueOf(System.currentTimeMillis())).build(), message.getBytes("UTF-8"));
                 System.out.println(" [x] Sent '" + message + "'");
-                Thread.sleep(100);
+                Thread.sleep(5000);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 
