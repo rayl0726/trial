@@ -60,6 +60,7 @@ public class Sort {
                 if(j > 0 && array[j-1] > temp) {
                     array[j] = array[j-1];
                 } else {
+
                     array[j] = temp;
                     //前面是已经排序完成的元素，不需要再继续执行
                     break;
@@ -121,6 +122,7 @@ public class Sort {
         quick(array, low, left-1);
         quick(array, left + 1, high);
     }
+
 
     public static void main(String[] args) {
         int[] list = {4,3,23,1234,324,435,567,567,4567,5};
