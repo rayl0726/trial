@@ -116,9 +116,61 @@ public class BigNumAdd {
     }
 
 
+    private static String bigNumSub(String num1, String num2) {
+        int len1 = num1.length() - 1;
+        int len2 = num2.length() - 1;
+        boolean minus = false;
+        if(len1 < len2 || num1.compareTo(num2) < 0) {
+            String tempNum = num1;
+            num1 = num2;
+            num2 = tempNum;
+            int tempLen = len1;
+            len1 = len2;
+            len2 = tempLen;
+            minus = true;
+        }
+        int maxLength = Math.max(len1, len2);
+        //考虑存在负数的情况
+        int[] res = new int[maxLength + 1];
+        int k = maxLength;
+        int carry = 0;
+        while(len1 >= 0 || len2 >= 0) {
+            int num = 10;
+            num += len1 >= 0 ? num1.charAt(len1) - '0' : 0;
+            num -= len2 >= 0 ? num2.charAt(len2) - '0' : 0;
+            num = num - carry;
+            res[k--] = num % 10;
+            carry = num / 10 == 0 ? 1 : 0;
+            len2--;
+            len1--;
+        }
+        StringBuilder result = new StringBuilder(maxLength + 1);
+        if(minus) {
+            result.append("-");
+        }
+
+        boolean judge = true;
+        for(int temp : res) {
+            if(judge) {
+                if(temp != 0) {
+                    result.append(temp);
+                    judge = false;
+                }
+            } else {
+                result.append(temp);
+            }
+        }
+
+        return result.toString();
+
+    }
+
+
+
     public static void main(String[] args) throws Exception {
-        String a = "921.42342";
-        String b = "1.12324123";
-        System.out.println(bigDecimalAdd(a, b));
+        String a = "322";
+        String b = "14123";
+//        System.out.println(bigDecimalAdd(a, b));
+        System.out.println(bigNumSub(a, b));
     }
 }
