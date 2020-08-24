@@ -24,6 +24,10 @@ public class Fibonacci {
      * @return
      */
     public static int method2(int n) {
+        if(n < 0) {
+            return -1;
+        }
+
         if(n < 2) {
             return n;
         }
@@ -38,7 +42,31 @@ public class Fibonacci {
             i++;
         }
         return temp[n];
+    }
 
+    /**
+     * 自底向上动态规划，空间优化
+     * @param n
+     * @return
+     */
+    public static int method4(int n) {
+        if(n < 0) {
+            return -1;
+        }
+
+        if(n < 2) {
+            return n;
+        }
+
+        int sum = 1;
+        int a = 0;
+        int b = 1;
+        for(int i = 2; i <= n; i++) {
+            sum = a + b;
+            a = b;
+            b = sum;
+        }
+        return sum;
     }
 
     /**
@@ -73,5 +101,6 @@ public class Fibonacci {
         System.out.println(method2(20));
         System.out.println(method1(20));
         System.out.println(method3(20));
+        System.out.println(method4(20));
     }
 }
